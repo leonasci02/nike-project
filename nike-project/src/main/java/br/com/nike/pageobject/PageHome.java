@@ -5,13 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Wait;
 
-import br.com.nike.definitions.Hooks;
+import br.com.nike.core.Hooks;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 
 public class PageHome {
 
-	
-	// force check in
     protected WebDriver driver;
     protected Wait<WebDriver> wait;
 
@@ -33,7 +31,6 @@ public class PageHome {
 
     public PageHome() {
         this.driver = Hooks.getDriver();
-        this.wait = Hooks.getWait();
     }
 	
 	
