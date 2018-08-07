@@ -21,6 +21,10 @@ public class DSL {
 	public void write(String field_id, String text){
 		write(By.id(field_id), text);
 	}
+
+	public void writeXpath(String field_xpath,String text){
+		write(By.xpath(field_xpath),text);
+	}
 	
 	public String getFieldValue(String field_id) {
 		return Hooks.getDriver().findElement(By.id(field_id)).getAttribute("value");
@@ -55,6 +59,12 @@ public class DSL {
 		Select combo = new Select(element);
 		combo.selectByVisibleText(value);
 	}
+
+	public void selectComboByXpath(String xpath, String value) {
+		WebElement element = Hooks.getDriver().findElement(By.id(xpath));
+		Select combo = new Select(element);
+		combo.selectByVisibleText(value);
+	}
 	
 	public void deselectCombo(String id, String value) {
 		WebElement element = Hooks.getDriver().findElement(By.id(id));
@@ -66,6 +76,24 @@ public class DSL {
 		WebElement element = Hooks.getDriver().findElement(By.id(id));
 		Select combo = new Select(element);
 		return combo.getFirstSelectedOption().getText();
+	}
+	
+	public String returnStringValue(String Xpath, String Valor) {
+		String Itens = new String();
+		List<WebElement> ReturnList = returnElementsByXpath(Xpath);
+		for (WebElement listWebElement : ReturnList) {
+			if (listWebElement.getText().equals(Valor)) {
+				Itens = listWebElement.getText();
+				listWebElement.click();
+				break;
+			}
+		}
+		return Itens;
+	}
+	
+	private List<WebElement> returnElementsByXpath(String XpathExpression) {
+		List<WebElement> Elementos = Hooks.getDriver().findElements(By.xpath(XpathExpression));
+		return Elementos;
 	}
 	
 	public List<String> getComboValues(String id) {
@@ -107,6 +135,10 @@ public class DSL {
 	
 	public void clickButton(String id) {
 		Hooks.getDriver().findElement(By.id(id)).click();
+	}
+	
+	public void clickButtonByXpath(String xpath){
+		Hooks.getDriver().findElement(By.xpath(xpath)).click();
 	}
 	
 	public String getElementValue(String id) {
