@@ -1,8 +1,6 @@
 package br.com.nike.pageobject;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.Wait;
 
 import br.com.nike.core.DSL;
@@ -12,27 +10,31 @@ public class PageProduct {
 	
     protected WebDriver driver;
     protected Wait<WebDriver> wait;
-    private DSL dsl;
-	
-	@FindBy(how=How.XPATH,using="//div[@class='combobox sel-tamanho']/div[@class='optionBox hide']/ul/li[@class='it-option']")
-	private String setTamanho;
-
-	@FindBy(how=How.XPATH,using="//div//a[contains(text(),'Comprar')]")
-	private String btnComprar;
+    DSL dsl;
 
 	public PageProduct() {
 		this.driver = Hooks.getDriver();
+		dsl = new DSL();	
 	}
 	
-	public void selectSizeProduct(String Size){
-		String Result = this.dsl.returnStringValue(setTamanho, Size);
+	public void selectSizeProduct(String Size) throws InterruptedException{
+		
+		String Result = dsl.returnStringValue("//div[@class='combobox sel-tamanho']/div[@class='optionBox hide']/ul/li[@class='it-option']", Size);
 		if(!Result.equals(Size)){
 			System.out.println("Não foi possível localizar o tamanho");
 		}
+		
+		
+		//dsl.getWaitHelper().waitForInvisibilityOfElement("//div[@id='ctl00_Conteudo_divLoad'  and @style='display: block;']");		
 	}
 	
-	public void clickButtonBuy(){
-		this.dsl.clickButtonByXpath(btnComprar);
+	public void clickButtonBuy() throws InterruptedException{
+		
+		Thread.sleep(1000);
+		//dsl.getWaitHelper().waitElementClickable("//*[@id='divProdutoFrete']");
+		dsl.moveToElement("//*[@id='divProdutoFrete']");
+		dsl.moveToElementClick("//*[@id='ctl00_Conteudo_ctl34_Content']//a[contains(text(),'Comprar')]");
+		//dsl.clickButtonByXpath();
 	}
 	
 }

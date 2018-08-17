@@ -1,8 +1,6 @@
 package br.com.nike.pageobject;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.Wait;
 
 import br.com.nike.core.DSL;
@@ -14,16 +12,14 @@ public class PageAddress {
     protected Wait<WebDriver> wait;
     private DSL dsl;
 	
-	@FindBy(how=How.XPATH,using="//a[contains(text(),'Continuar')]")
-	private String btnContinue;
-
 	public PageAddress() {
 		this.driver = Hooks.getDriver();
+		dsl = new DSL();
 	}
 	
 	public void setAddress(String Type){
-		this.dsl.clickButtonByXpath("//strong[contains(text(),'"+Type+"')]");
-		this.dsl.clickButtonByXpath(btnContinue);
+		dsl.clickButtonByXpath("//strong[contains(text(),'"+Type+"')]");
+		dsl.clickButtonByXpath("//a[contains(text(),'Continuar')]");
 	}
 	
 }

@@ -23,8 +23,8 @@ public class Hooks {
 	private static WebDriver driver;
 	private String baseUrl;
 
-	public String getBaseUrl() throws FileNotFoundException, IOException {
-		this.baseUrl = PropertiesUtil.getProjectProperty("site");
+	public String getBaseUrl(String url) throws FileNotFoundException, IOException {
+		this.baseUrl = url;
 		return baseUrl;
 	}
 

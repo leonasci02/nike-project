@@ -7,7 +7,10 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+
+import br.com.nike.util.WaitHelper;
 
 public class DSL {
 
@@ -252,6 +255,17 @@ public class DSL {
 			}
 		}
 		return idColuna;
+	}
+	public void moveToElement(String xpath) {
+		new Actions(Hooks.getDriver()).moveToElement(Hooks.getDriver().findElement(By.xpath(xpath))).perform();
+	}
+	
+	public void moveToElementClick(String xpath) {
+		new Actions(Hooks.getDriver()).moveToElement(Hooks.getDriver().findElement(By.xpath(xpath))).click().perform();
+	}
+	
+	public WaitHelper getWaitHelper() {
+		return new WaitHelper(Hooks.getDriver());
 	}
 
 }

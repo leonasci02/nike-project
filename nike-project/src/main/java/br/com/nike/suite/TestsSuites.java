@@ -6,11 +6,13 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import br.com.nike.core.Hooks;
-import br.com.nike.tests.TestNikeRegister;
+import br.com.nike.tests.TestNikeBuyProduct;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	TestNikeRegister.class
+
+	TestNikeBuyProduct.class
+	
 })
 public class TestsSuites {
 
